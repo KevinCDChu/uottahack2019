@@ -1,7 +1,11 @@
 let timer = null;
 let time = 0;
+var currentURL = "";
+var current = false;
+var pattern = /(http\:\/\/|https\:\/\/)?(www.)?(facebook|twitter|reddit|youtube|netflix).*/;
 
 var startTimer = () => {
+  time = 0;
     timer= setInterval(incrementTime, 1000)
 }
 
@@ -16,19 +20,26 @@ var incrementTime = () => {
   time++;
   console.log(time);
 }
-
-chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-  var url = tabs[0].url;
-  chrome.tabs.onActivated.addListener(function(activeInfo) {
-    chrome.tabs.get(activeInfo.tabId, function(tab){
-        var pattern = /(http\:\/\/|https\:\/\/)?(www.)?(facebook|twitter|reddit|youtube|netflix).*/;
-        if (pattern.test(tab.url)){
-            startTimer();
+var checkURL = () => {
+  chrome.tabs.query({
+    active: true,
+    currentWindow: true
+  }, function(tabs) {
+    if(tabs.length > 0){
+      var tab = tabs[0];
+      var url = tab.url;
+      if(url != currentURL){
+        if (pattern.test(url)){
+          stopTimer();
+          startTimer();
         } else {
           stopTimer();
         }
-    });
-  }); 
-});
+        currentURL = url; 
+      }
+    }
+  });
+  
+}
 
-
+setInterval(checkURL, 500);
