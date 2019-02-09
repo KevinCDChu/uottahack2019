@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import MainSection from '../components/MainSection';
 import * as TodoActions from '../actions/todos';
 import style from './App.css';
 
@@ -14,7 +13,11 @@ import style from './App.css';
   })
 )
 export default class App extends Component {
-
+  constructor(props){
+    super(props);
+    this.state = {
+    }
+  }
   static propTypes = {
     todos: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
@@ -24,8 +27,8 @@ export default class App extends Component {
     const { todos, actions } = this.props;
 
     return (
-      <div className={style.normal}>
-
+      <div className={style.normsal}>
+         <span>Hello2222</span> 
       </div>
     );
   }

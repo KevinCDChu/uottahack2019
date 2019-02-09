@@ -1,41 +1,34 @@
-let windowId = 0;
-const CONTEXT_MENU_ID = 'example_context_menu';
+let timer = null;
+let time = 0;
 
-function closeIfExist() {
-  if (windowId > 0) {
-    chrome.windows.remove(windowId);
-    windowId = chrome.windows.WINDOW_ID_NONE;
-  }
+var startTimer = () => {
+    timer= setInterval(incrementTime, 1000)
 }
 
-function popWindow(type) {
-  closeIfExist();
-  const options = {
-    type: 'popup',
-    left: 100,
-    top: 100,
-    width: 800,
-    height: 475,
-  };
-  if (type === 'open') {
-    options.url = 'window.html';
-    chrome.windows.create(options, (win) => {
-      windowId = win.id;
+var stopTimer = () => {
+  if(timer != null){
+    clearInterval(timer);
+    time = 0;
+  }
+  
+}
+var incrementTime = () => {
+  time++;
+  console.log(time);
+}
+
+chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+  var url = tabs[0].url;
+  chrome.tabs.onActivated.addListener(function(activeInfo) {
+    chrome.tabs.get(activeInfo.tabId, function(tab){
+        var pattern = /(http\:\/\/|https\:\/\/)?(www.)?(facebook|twitter|reddit|youtube|netflix).*/;
+        if (pattern.test(tab.url)){
+            startTimer();
+        } else {
+          stopTimer();
+        }
     });
-  }
-}
-
-chrome.contextMenus.create({
-  id: CONTEXT_MENU_ID,
-  title: 'React Chrome Extension Example',
-  contexts: ['all'],
-  documentUrlPatterns: [
-    'https://github.com/*'
-  ]
+  }); 
 });
 
-chrome.contextMenus.onClicked.addListener((event) => {
-  if (event.menuItemId === CONTEXT_MENU_ID) {
-    popWindow('open');
-  }
-});
+
