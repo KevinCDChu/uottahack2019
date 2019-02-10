@@ -27,7 +27,8 @@ export default class App extends Component {
     const { todos, actions } = this.props;
 
     return (
-      <div className="App">
+      <div className={style.normsal}>
+         <span>Hello2222</span> 
       </div>
     );
   }
