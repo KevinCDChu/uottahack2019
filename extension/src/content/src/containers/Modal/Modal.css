@@ -1,0 +1,22 @@
+#injected-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(233, 233, 233, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; }
+  #injected-modal .injected-modal__card {
+    display: flex;
+    height: 80%;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.15); }
+    #injected-modal .injected-modal__card .injected-modal__card__content {
+      flex: 1;
+      margin: 20px;
+      background-color: #eee; }

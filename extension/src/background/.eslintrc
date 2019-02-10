@@ -1,0 +1,17 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "plugins": [ "import", "prettier" ],
+  "extends": [ "react-app", "airbnb", "prettier" ],
+  "rules": {
+    "prettier/prettier": [ "error", {
+      "semi": true,
+      "singleQuote": true,
+      "trailingComma": "all"
+    }],
+    "jsx-a11y/href-no-hash": "off",
+    "react/jsx-filename-extension": "off"
+  }
+}

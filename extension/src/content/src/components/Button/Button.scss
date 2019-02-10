@@ -1,0 +1,17 @@
+$btn-color: #ccc !default;
+
+.injected-btn {
+  height: 60px;
+  width: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: $btn-color;
+
+  &:hover {
+    background-color: darken($btn-color, 5%);
+  }
+  &:focus {
+    outline: none;
+  }
+}

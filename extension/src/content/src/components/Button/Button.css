@@ -1,0 +1,11 @@
+.injected-btn {
+  height: 60px;
+  width: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #ccc; }
+  .injected-btn:hover {
+    background-color: #bfbfbf; }
+  .injected-btn:focus {
+    outline: none; }
